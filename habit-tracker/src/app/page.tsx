@@ -1,4 +1,22 @@
+'use client'
+
+import { HabitItem } from "@/components/HabitItem";
 import Link from "next/link";
+import { useState } from React;
+
+const initialHabits = [
+  {
+    id: '1',
+    name: 'Beber 2 litros de água',
+    week: ['done', 'done', 'unmarked', 'done', 'done', 'missed', 'unmarked'],
+  },
+  {
+    id: '2',
+    name: 'Fazer exercício físico',
+    week: ['unmarked', 'done','done','done','done',]
+  }
+  }
+]
 
 export default function Home() {
   const habits = [];
