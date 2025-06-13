@@ -1,7 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { FaTrash, FaCheck, FaTimes, FaCircle } from "react-icons/fa";
+import { Check } from "@/app/components/icons/Check";
+import { Cancel } from "@/app/components/icons/Cancel";
+import { Circle } from "@/app/components/icons/Circle";
+import { Trash } from "@/app/components/icons/Trash";
+
 
 type DayStatus = "done" | "missed" | "unmarked";
 
@@ -15,28 +19,16 @@ interface HabitItemProps {
 export function HabitItem({ id, name, week, onDelete }: HabitItemProps) {
   const router = useRouter();
 
-  const getStatusIcon = (status: DayStatus) => {
+  function getStatusIcon(status: DayStatus) {
     switch (status) {
       case "done":
-            return (
-                <div className="text-green-400">
-          <FaCheck />
-        </div>)
+        return <Check />;
       case "missed":
-            return (
-              <div className="text-red-400">
-                <FaTimes />
-              </div>
-            );
-      case "unmarked":
+        return <Cancel />;
       default:
-        return (
-          <div className="text-gray-500">
-            <FaCircle />
-          </div>
-        );
+        return <Circle />;
     }
-  };
+  }
 
   const handleClick = () => router.push(`/habits/${id}`);
 
@@ -50,9 +42,7 @@ export function HabitItem({ id, name, week, onDelete }: HabitItemProps) {
           {name}
         </h3>
         <button onClick={() => onDelete(id)}>
-          <div className="text-red-400 hover:text-red-600">
-            <FaTrash />
-          </div>
+            <Trash />
         </button>
       </div>
 
