@@ -1,30 +1,35 @@
-'use client'
+"use client";
 
-import { HabitItem } from "@/components/HabitItem";
+import { HabitItem } from "@/app/components/HabitItem";
 import Link from "next/link";
-import { useState } from React;
+import { useState } from "react";
 
 const initialHabits = [
   {
-    id: '1',
-    name: 'Beber 2 litros de água',
-    week: ['done', 'done', 'unmarked', 'done', 'done', 'missed', 'unmarked'],
+    id: "1",
+    name: "Beber 2 litros de água",
+    week: ["done", "done", "unmarked", "done", "done", "missed", "unmarked"],
   },
   {
-    id: '2',
-    name: 'Fazer exercício físico',
-    week: ['unmarked', 'done','done','done','done',]
-  }
-  }
-]
+    id: "2",
+    name: "Fazer exercício físico",
+    week: ["unmarked", "done", "done", "done", "done", "unmarked", "missed"],
+  },
+];
 
 export default function Home() {
-  const habits = [];
+  const [habits, setHabits] = useState(initialHabits);
+
+  const deleteHabit = (id: string) => {
+    setHabits((prev) => prev.filter((habit) => habit.id !== id));
+  };
 
   return (
     <main className="w-full max-w-md">
       {habits.length === 0 ? (
-        <p className="text-center mb-8">Você ainda não cadastrou nenhum hábito</p>
+        <p className="text-center mb-8">
+          Você ainda não cadastrou nenhum hábito
+        </p>
       ) : (
         <ul>{/* Aqui colocarei depois os hábitos cadastrados */}</ul>
       )}
