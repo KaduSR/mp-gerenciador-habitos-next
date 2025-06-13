@@ -11,7 +11,7 @@ export default function NewHabitPage() {
         e.preventDefault();
         if (!name.trim()) return;
 
-        alert('Novo Hábito adicionado: ${ name }');
+        alert('Novo Hábito adicionado:' + name);
 
         router.push('/');
     };
