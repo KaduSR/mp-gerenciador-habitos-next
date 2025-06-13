@@ -26,7 +26,7 @@ export default function HabitDetail({ params }: HabitDetailProps) {
   if (habit === null) return <p>Carregando...</p>;
   if (!habit) return <p>Hábito não encontrado.</p>;
 
-  const daysInMonth = new Date().getDate(); // só considerando o mês atual
+  const daysInMonth = new Date().getDate();
   const days = Array.from({ length: daysInMonth }, (_, i) => i);
 
   const toggleDay = async (dayIndex: number) => {
@@ -59,6 +59,15 @@ export default function HabitDetail({ params }: HabitDetailProps) {
         </button>
         <h1 className="text-xl font-bold">{habit.name}</h1>
       </div>
+
+      <div className="grid grid-cols-7 text-center text-gray-400 mb-2">
+        {["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"].map((d) => (
+          <div key={d} className="text-sm font-medium">
+            {d}
+          </div>
+        ))}
+      </div>
+
       <div className="grid grid-cols-7 gap-2">
         {days.map((_, index) => (
           <button
