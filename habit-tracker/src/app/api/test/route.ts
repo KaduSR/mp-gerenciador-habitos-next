@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { saveHabit, getAllHabits, toggleDayStatus } from "@/app/lib/habits";
+import { saveHabit, getAllHabits, toggleDayStatus, deleteHabit } from "@/app/lib/habits";
+
 
 export async function POST(req: Request) {
     const { name } = await req.json();
@@ -24,4 +25,15 @@ export async function PUT(req: Request) {
     const updated = await toggleDayStatus(id, dayIndex);
     if (!updated) return NextResponse.json({ error: 'Hábito não encontrado' }, { status: 404 });
     return NextResponse.json(updated, { status: 200 });
+}
+
+export async function DELETE (req: Request) {
+    const url = new URL(req.url);
+    const id = url.searchParams.get('id');
+    if (!id) {
+        return NextResponse.json({ error: 'ID não fornecido' }, { status: 400 });
+    }
+    const ok = await deleteHabit(id);
+    if (!ok) return NextResponse.json({ error: 'Hábito não encontrado' }, { status: 404 });
+    return NextResponse.json({ sucess: true, message: 'Hábito deletado com sucesso' }, { status: 200 });
 }

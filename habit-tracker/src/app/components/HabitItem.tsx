@@ -42,8 +42,10 @@ export function HabitItem({ id, name, week, onDelete }: HabitItemProps) {
           {name}
         </h3>
         <button onClick={() => onDelete(id)}>
-            <Trash />
+            <Trash className="text-red-400 hover:text-red-600 w-5 h-5"/>
         </button>
+
+
       </div>
 
       <div className="flex justify-between text-sm mt-3">
