@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { saveHabit, getAllHabits, toggleDayStatus, deleteHabit } from "@/app/lib/habits";
+import { saveHabit, getAllHabits, deleteHabit, toggleDayMonth} from "@/app/lib/habits";
 
 
 export async function POST(req: Request) {
@@ -17,14 +17,12 @@ export async function GET() {
 }
 
 export async function PUT(req: Request) {
-    const { id, dayIndex } = await req.json();
-    if (typeof id !== 'string' || typeof dayIndex !== 'number') {
-        return NextResponse.json({ error: 'Dados inválidos' }, { status: 400 });
-    }
-
-    const updated = await toggleDayStatus(id, dayIndex);
-    if (!updated) return NextResponse.json({ error: 'Hábito não encontrado' }, { status: 404 });
-    return NextResponse.json(updated, { status: 200 });
+  const { id, year, month, day } = await req.json();
+  const result = await toggleDayMonth(id, new Date(year, month - 1, day));
+  if (!result) {
+    return NextResponse.json({ error: "Dados inválidos" }, { status: 400 });
+  }
+  return NextResponse.json(result, { status: 200 });
 }
 
 export async function DELETE (req: Request) {

@@ -60,7 +60,42 @@ export async function toggleDayStatus(
 }
 
 export async function deleteHabit(id: string): Promise<boolean> {
-  const key = "habit:${id}";
+  const key = `habit:${id}`;
   const removed = await redis.del(key);
   return removed > 0;
+}
+
+const montKey = (id: string, date: Date) => {
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  return `habit:${id}:${date.getFullYear()}-${month}`;
+};
+
+export async function toggleDayMonth(
+  id: string,
+  date: Date
+): Promise<{ day: number; status: DayStatus } | null> {
+  const key = montKey(id, date);
+  const day = date.getDate();
+  const field = `day:${day}`;
+
+  const current = await redis.hget<string>(key, field);
+  const next: DayStatus =
+    current === "done" ? "missed" : current === "missed" ? "unmarked" : "done";
+
+  await redis.hset(key, { [field]: next });
+  return { day, status: next };
+}
+
+export async function getMonthStatuses(
+  id: string,
+  date: Date
+): Promise<Record<number, DayStatus>> {
+  const key = montKey(id, date);
+  const all = await redis.hgetall(key);
+  const result: Record<number, DayStatus> = {};
+  for (const [field, val] of Object.entries(all ?? {})) {
+    const match = field.match(/^day:(\d+)$/);
+    if (match) result[parseInt(match[1], 10)] = val as DayStatus;
+  }
+  return result;
 }
