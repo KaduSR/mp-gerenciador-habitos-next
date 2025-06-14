@@ -1,7 +1,0 @@
-@import "tailwindcss/preflight";
-@tailwind utilities;
-
-
-body {
-  @apply bg-black text-white font-sans
-}
