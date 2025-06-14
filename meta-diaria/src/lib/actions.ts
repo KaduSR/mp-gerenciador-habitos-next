@@ -21,3 +21,12 @@ export async function createHabit(formData: FormData) {
 
     redirect("/habits");
 }
+
+export async function markDoneToday(formData: FormData) {
+  const id = formData.get("id") as string;
+  const today = new Date().toISOString().slice(0, 10);
+
+  if (!id) return;
+
+  await kv.sadd(`habit:${id}:dates`, today);
+}
