@@ -1,0 +1,29 @@
+.card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.name {
+    font-size: 1rem;
+    color: #333;
+}
+
+.checkButton {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.checkButton:hover {
+    background-color: #45a049;
+}

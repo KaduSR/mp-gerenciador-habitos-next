@@ -1,0 +1,10 @@
+.list {
+    padding: 16px;
+    display: grid;
+    gap: 12px;;
+}
+
+.empty{
+    color: #666;
+    font-style: italic;
+}
