@@ -10,7 +10,8 @@ export default function NewHabitForm() {
     return (
         <form action={createHabit} className={styles.form}>
             <input type="text" name="name" placeholder="nome do hábito" required />
-            <input
+            <input type="hidden" name="icon" value={icon} />
+            <IconSelect name={icon} onchange={setIcon} />
         </form>
-    )
+    );
 }
