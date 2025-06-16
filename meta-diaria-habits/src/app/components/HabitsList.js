@@ -9,7 +9,10 @@ export default function HabitsList({ habits = [] }) {
       {habits.length === 0 ? (
         <p className={styles.empty}>Você ainda não tem hábitos cadastrados. </p>
       ) : (
-          habits.map((habit) => (<HabitCard key={habit.id} habit={{ id: habit.id, name: hbit.name }}
+          habits.map((habit) => (
+            <HabitCard
+              key={habit.id}
+              habit={{ id: habit.id, name: habit.name }}
             initialDone={habit.done}
           />
           ))

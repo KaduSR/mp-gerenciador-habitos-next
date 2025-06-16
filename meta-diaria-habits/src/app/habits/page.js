@@ -9,8 +9,8 @@ export default async function HabitsPage() {
   const habitWithDone = await Promise.all(
     habits.map(async (habitId) => {
       const habit = await kv.get(`habit:${habitId}`);
-      const done = (await kv.get(`habit:${habitId}:done:${today}`)) || true;
-      return { ...habit, done };
+      const done = (await kv.get(`habitLog:${id}:${today}`)) === true;
+      return { id, name: habit.name,done };
     })
   );
 
