@@ -1,5 +1,5 @@
-import Header from "@/components/Header";
-import HabitsList from "@/components/HabitsList";
+import Header from "@/app/components/Header";
+import HabitsList from "@/app/components/HabitsList";
 import kv from "@/lib/kv";
 
 export default async function HabitsPage() {
